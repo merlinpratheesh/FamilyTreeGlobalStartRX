@@ -1,0 +1,65 @@
+
+<mat-grid-list cols="16" rowHeight="3.99vw">
+  <mat-grid-tile      
+      colspan="16"
+      rowspan="1"
+      [style.background]="'lightblue'">   
+
+     
+
+        <ng-template [cdkPortalOutlet]="selectedPortal1"></ng-template>
+     
+        <ng-template #templatePortalContent1>
+          <mat-toolbar   color="primary" >
+            <mat-toolbar-row>
+              <span>I give consent.com</span>
+            </mat-toolbar-row>
+          </mat-toolbar>
+        </ng-template>
+      
+    
+
+  </mat-grid-tile>
+    <mat-grid-tile      
+      colspan="14"
+      rowspan="10"
+      [style.background]="'lightgreen'">
+
+
+    
+    <ng-template [cdkPortalOutlet]="selectedPortal2"></ng-template>
+
+
+
+
+   <ng-template #templatePortalContent2>Based on user login status show details</ng-template>
+
+
+    
+  </mat-grid-tile>
+    <mat-grid-tile      
+      colspan="2"
+      rowspan="10"
+      [style.background]="'lightpink'">
+
+
+
+    <ng-template [cdkPortalOutlet]="selectedPortal3"></ng-template>
+
+  <ng-template #templatePortalContent3>side bar options</ng-template>
+
+
+    
+  </mat-grid-tile>
+    <mat-grid-tile      
+      colspan="16"
+      rowspan="1"
+     [style.background]="'#DDBDF1'">
+
+    <ng-template [cdkPortalOutlet]="selectedPortal4"></ng-template> 
+  <ng-template #templatePortalContent4> @copyright candidser.co.in</ng-template>
+
+
+    
+  </mat-grid-tile>
+</mat-grid-list>
