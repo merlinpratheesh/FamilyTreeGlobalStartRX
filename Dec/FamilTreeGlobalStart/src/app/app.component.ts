@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map } from 'rxjs/operators';
-import { UserdataService } from './service/userdata.service';
+import { map, take } from 'rxjs/operators';
+import { UserdataService ,TestDocument,TestArrayNew,TestArrayMap} from './service/userdata.service';
+import { ArrayType, MapType } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,19 @@ export class AppComponent implements OnInit {
   loggedin:string= undefined;
   loggedinObs:Observable<string>;
   displayame:string;
+
   titleDialogRef: MatDialogRef<DialogOverviewExampleDialog>
+  myarraydisplay: [] = [];
+  Componentvar: TestDocument | undefined;
+  Componentvar1: string[] | undefined;
+  Componentvar2: TestArrayMap | undefined;
+
+  mysubDocRead: Subscription | undefined;
+  myitemsdisplay: Observable<TestDocument>;
+  myitemsdisplayArray: Observable<TestArrayNew> | undefined;
+  myitemsdisplayArrayMap: Observable<TestArrayMap>| undefined;
+
+
   constructor(public dialog: MatDialog, public afAuth: AngularFireAuth,
     public tutorialService: UserdataService) {
     this.afAuth.authState.pipe(
@@ -34,7 +47,44 @@ export class AppComponent implements OnInit {
       }
     })).subscribe(mydata=>{
       if(mydata === 'true'){
+
         this.titleDialogRef.close();
+        this.myitemsdisplay = this.tutorialService.getDocumentPath('FamilyTreeCollection', 'mKSvt6u1jnp2Au14dCF7').pipe(take(1));
+
+        this.mysubDocRead = this.myitemsdisplay.subscribe(testdataSubscribed => {
+          this.Componentvar = testdataSubscribed;
+
+          if (testdataSubscribed !== null) {
+            for (const fieldkey in testdataSubscribed) {
+              console.log(fieldkey, testdataSubscribed[fieldkey]);//keys & values              
+            }
+            console.log(this.Componentvar?.stringtype)
+          }
+        });
+        this.myitemsdisplayArray = this.tutorialService.getDocumentPathNew('FamilyTreeCollection', 'mKSvt6u1jnp2Au14dCF7').pipe(take(1));
+        this.mysubDocRead = this.myitemsdisplayArray.subscribe(testdataSubscribedNew => {
+          this.Componentvar1 = testdataSubscribedNew.arraytype;
+          if (testdataSubscribedNew !== null) {
+            for (let i = 0; i < this.Componentvar1.length; i++) {
+              console.log(this.Componentvar1[i]);
+            }
+            this.Componentvar1.forEach((value) => {
+              console.log(value);
+            });
+          }
+        });
+        this.myitemsdisplayArrayMap = this.tutorialService.getDocumentArrayMap('FamilyTreeCollection', 'mKSvt6u1jnp2Au14dCF7').pipe(take(1));
+        this.mysubDocRead = this.myitemsdisplayArrayMap.subscribe(testdataSubscribedMap => {
+          this.Componentvar2 = testdataSubscribedMap;
+          if (testdataSubscribedMap !== null) {
+            for (const fieldkey in testdataSubscribedMap) {
+              console.log(fieldkey, testdataSubscribedMap[fieldkey]);//keys & values              
+            }
+            
+              console.log(this.Componentvar2?.maptype);
+    
+          }
+        });
       }
     });
 

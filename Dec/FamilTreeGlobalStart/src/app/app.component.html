@@ -17,14 +17,33 @@
     </div>    
   </mat-toolbar>
 
-  Learnings
+  <div *ngIf="myitemsdisplay | async as user">
+    <div *ngIf="user as mytemp1 ">
+        <pre>{{ mytemp1.stringtype }}</pre>
+    </div>
+  </div>
+  <div *ngIf="myitemsdisplayArray | async as useroneNew">
+    <div *ngFor="let arrayval of useroneNew.arraytype ">
+      <pre>{{ arrayval }}</pre>
+    </div>
+    </div>
+    <div *ngIf="myitemsdisplayArrayMap | async as userone">
+      <div *ngIf="userone.maptype  as userone1">
+        <pre>{{ userone1 | json }}</pre>
+        
+        <pre>{{ userone1.fathername }}</pre>
+        <pre>{{ userone1.mothername }}</pre>
+        </div>
+    </div>  
+
+    <!--Learnings
     Obs-{{loggedinObs | async}} var-{{loggedin}}
     Used as Flag-*ngIf=afAuth.authState | async as user => user obj available
     Tillthenshowspinner
     How to check user obj value is null using key -> use loggedin var.
 
 
-  Angular Material
+  Angular Material-->
     
       Mat-Button
       <button mat-raised-button color="primary">Primary</button>
