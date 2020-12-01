@@ -1,0 +1,132 @@
+<div *ngIf="loggedin === 'true'"><!--If Obs is null show loading-->
+  <mat-toolbar color="primary">
+    <h1>
+      SanityTests
+    </h1>
+
+    <span fxFlex="grow"></span>
+
+    <div>
+      Welcome {{displayame}}!
+      <button mat-icon-button>
+
+        <fa-icon (click)="tutorialService.logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-out-alt']">
+        </fa-icon>
+        <!--signup-->
+      </button>
+    </div>    
+  </mat-toolbar>
+  <div>
+  Angular Material
+    
+      Mat-Button
+      <button mat-raised-button color="primary">Primary</button>
+    
+      Mat-spinner
+      <mat-spinner></mat-spinner>
+    
+      Mat-dialog
+    <button mat-raised-button color="primary" (click)="openDialog()">Pick one</button>
+  </div>
+  <div>
+  Flex layout
+    1.FxLayout-row/column
+    <div fxLayout="column">
+      <span>First-Span</span>
+      <span>Second-Span</span>
+    </div>
+    <div fxLayout="row">
+      <div>First-Div</div>
+      <div>Second-Div</div>
+    </div>
+  
+    2.fxShow/fxHide
+    Element: <div fxShow> Showed</div>
+    Element: Hiddenhere: <div fxHide> Hidden</div>
+  </div>
+
+  <div>  
+  Font Awesome
+    1.Solid freeIcons
+    <button mat-icon-button>
+      <fa-icon (click)="tutorialService.login()" class="fas faSignInAlt fa-lg" [icon]="['fas', 'sign-in-alt']">
+      </fa-icon>
+    </button>
+  </div>
+  <div>
+  <pre>
+  Firebase
+    1.Authentication: 
+    A.Observable:loggedinObs: Observable-string
+    B.Variable- loggedin: string
+
+    2.Storage
+  </pre>
+    3.Firestore
+    A.Read string into mat-input/mat-formField
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Fill form field</mat-label>
+        <input matInput placeholder="{{(readstring | async)?.StringField}}">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Update the value</mat-hint>
+      </mat-form-field>
+    </p>
+  
+    <div *ngIf="readstring | async as user">
+      <div *ngIf="user as mytemp1 ">
+          <pre>{{ mytemp1.StringField }}</pre>
+      </div>
+    </div>
+
+
+    B. Read string[]-Mat-select/
+    <div *ngIf="readarraystring | async as readdata">
+      <div *ngFor="let stringitem of  readdata.ArrayField">
+        {{stringitem}}
+      </div>
+    </div>
+
+    C.Read Map obj-Checkbox
+    <div *ngIf="readmap | async as readdata">
+      {{readdata.MapField | json}}
+    </div>
+
+    D. Read Array of Map Obj-Autocomplete
+    <div *ngIf="readarraymap | async as readdata">
+      <div *ngFor="let stringitem of  readdata.ArrayMapField">
+        {{stringitem | json}}
+      </div>
+    </div>
+  </div>
+
+    4.rxFire
+    Build Query
+    WithLatestFrom,map
+    CombineLatest,map
+
+</div>
+    <div *ngIf="loggedin === undefined">
+        SHOW SPINNER
+    </div>
+
+
+    <div *ngIf="loggedin === 'false'">
+      <mat-toolbar color="primary">
+        <h1>
+          SanityTests
+        </h1>
+    
+        <span fxFlex="grow"></span>
+    
+        <div>
+          Welcome User!
+          <button mat-icon-button>
+            <fa-icon (click)="tutorialService.login()" class="fas faSignInAlt fa-lg" [icon]="['fas', 'sign-in-alt']">
+            </fa-icon>
+          </button>
+        </div>    
+      </mat-toolbar>
+      SHOW SCELETON Menu details
+      Show log in dialog  
+    </div>
