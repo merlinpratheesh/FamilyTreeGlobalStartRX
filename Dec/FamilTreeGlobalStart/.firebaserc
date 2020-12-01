@@ -1,0 +1,21 @@
+{
+  "targets": {
+    "jeniapp-f7c47": {
+      "hosting": {
+        "globalstart": [
+          "jeniapp-f7c47"
+        ]
+      }
+    },
+    "verifytesttool": {
+      "hosting": {
+        "globalstart": [
+          "verifytesttool"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "verifytesttool"
+  }
+}
