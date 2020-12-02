@@ -2,8 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map } from 'rxjs/operators';
-import { UserdataService } from './service/userdata.service';
+import { map, take } from 'rxjs/operators';
+import { UserdataService,TestDocument } from './service/userdata.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,9 @@ export class AppComponent implements OnInit {
   readmap: Observable<any>;
   readarraymap:Observable<any[]>;
 
+  Componentvar: TestDocument | undefined;
+
+
   displayame:string;
   titleDialogRef: MatDialogRef<DialogOverviewExampleDialog>
   constructor(public dialog: MatDialog, public afAuth: AngularFireAuth,
@@ -28,9 +31,16 @@ export class AppComponent implements OnInit {
       if (credential !== null) {
         console.log('credential-!null,ReachedLogin-success', credential);        
         this.loggedin='true';
-        this.readstring= this.tutorialService.ReadTestString().pipe(map((val:any)=>{
-          return(val.data());
-        }));
+        
+        this.readstring= this.tutorialService.ReadTestString().pipe(take(1),        
+        map((val: any)=>{
+          console.log(val.StringField);
+          for (const fieldkey in val) {
+            console.log(fieldkey, val[fieldkey]);//keys & values              
+          }         
+          return (val.data());
+        })
+        );
         this.readarray= this.tutorialService.ReadTestStringArr().pipe(map((val:any)=>{
           return(val.data());
         }));

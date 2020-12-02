@@ -4,6 +4,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import {  doc } from 'rxfire/firestore';
 import firebase from 'firebase/app';
 
+export interface TestDocument{
+  StringField: string; 
+}
 
 @Injectable({
   providedIn: 'root'
