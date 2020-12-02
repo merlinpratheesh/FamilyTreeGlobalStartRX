@@ -64,20 +64,22 @@
   </pre>
     3.Firestore
     A.Read string into mat-input/mat-formField
+    <div *ngIf="readstring | async as readfromdb">
     <p>
       <mat-form-field appearance="fill">
         <mat-label>Fill form field</mat-label>
-        <input matInput placeholder="{{(readstring | async)?.StringField}}">
+        <input matInput placeholder="{{readfromdb?.StringField}}">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Update the value</mat-hint>
       </mat-form-field>
     </p>
   
-    <div *ngIf="readstring | async as user">
-      <div *ngIf="user as mytemp1 ">
+    <div *ngIf="readfromdb">
+      <div *ngIf="readfromdb as mytemp1 ">
           <pre>{{ mytemp1.StringField }}</pre>
       </div>
     </div>
+  </div>
 
 
     B. Read string[]-Mat-select/

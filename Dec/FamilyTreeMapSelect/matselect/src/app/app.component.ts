@@ -34,9 +34,10 @@ export class AppComponent implements OnInit {
         
         this.readstring= this.tutorialService.ReadTestString().pipe(take(1),        
         map((val: any)=>{
-          console.log(val.StringField);
-          for (const fieldkey in val) {
-            console.log(fieldkey, val[fieldkey]);//keys & values              
+          console.log(val.data().StringField);
+          //console.log(val.StringField);
+          for (const fieldkey in val.data()) {
+            console.log(fieldkey, val.data()[fieldkey]);//keys & values              
           }         
           return (val.data());
         })
